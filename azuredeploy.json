@@ -425,6 +425,7 @@
             "type": "Microsoft.Synapse/workspaces/datasets",
             "name": "sqlPoolSchema",
             "apiVersion": "2018-06-01",
+            "location": "[parameters('location')]",
             "properties": {
                 "annotations": [],
                 "type": "SqlPoolTable",
@@ -443,6 +444,7 @@
             "type": "Microsoft.Synapse/workspaces/pipelines",
             "name": "ny_taxicab_pipeline_3",
             "apiVersion": "2018-06-01",
+            "location": "[parameters('location')]",
             "properties": {
                 "activities": [
                     {

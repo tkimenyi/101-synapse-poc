@@ -258,10 +258,10 @@
   "variables": {
     "synapseName": "[toLower(concat(parameters('companyTla'),parameters('deploymentType')))]",
     "dlsName": "[toLower(concat('dls',parameters('companyTla'),parameters('deploymentType')))]",
-    "dlsFsName": "[toLower(concat(variables('dlsName'),'fs1'))]",
-    "sqlPoolName": "[toLower(concat(variables('workspaceName'),'p1'))]",
-    "workspaceName": "[toLower(concat(variables('synapseName'),'ws1'))]",
-    "sparkPoolName": "[toLower('synasp1')]",
+    "dlsFsName": "[toLower(concat(variables('dlsName'),'demofs1'))]",
+    "sqlPoolName": "[toLower(concat(variables('workspaceName'),'demop1'))]",
+    "workspaceName": "[toLower(concat(variables('synapseName'),'demows1'))]",
+    "sparkPoolName": "[toLower('demosynasp1')]",
     "logicApps": [
       "SynapsePauseSchedule",
       "SynapseResumeSchedule"

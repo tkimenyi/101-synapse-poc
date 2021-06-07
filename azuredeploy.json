@@ -1,0 +1,735 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "_artifactsLocation": {
+      "type": "string",
+      "defaultValue": "[deployment().properties.templatelink.uri]"
+    },
+    "_artifactsLocationSASToken": {
+      "type": "securestring",
+      "defaultValue": ""
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for your deployment."
+      }
+    },
+    "companyTla": {
+      "type": "string",
+      "metadata": {
+        "description": "This is a Three Letter Acronym for your company name. 'CON' for Contoso for example."
+      }
+    },
+    "allowAllConnections": {
+      "type": "string",
+      "allowedValues": [
+        "true",
+        "false"
+      ],
+      "defaultValue": "true"
+    },
+    "sparkDeployment": {
+      "type": "string",
+      "defaultValue": "true",
+      "allowedValues": [
+        "true",
+        "false"
+      ],
+      "metadata": {
+        "description": "'True' deploys an Apache Spark pool as well as a SQL pool. 'False' does not deploy an Apache Spark pool."
+      }
+    },
+    "sparkNodeSize": {
+      "type": "string",
+      "defaultValue": "Medium",
+      "allowedValues": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "metadata": {
+        "description": "This parameter will determine the node size if SparkDeployment is true"
+      }
+    },
+    "deploymentType": {
+      "type": "string",
+      "defaultValue": "poc",
+      "allowedValues": [
+        "devtest",
+        "poc",
+        "prod",
+        "shared"
+      ],
+      "metadata": {
+        "description": "Specify deployment type: DevTest, POC, Prod, Shared. This will also be used in the naming convention."
+      }
+    },
+    "sqlAdministratorLogin": {
+      "type": "string",
+      "metadata": {
+        "description": "The username of the SQL Administrator"
+      }
+    },
+    "sqlAdministratorLoginPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the SQL Administrator"
+      }
+    },
+    "sku": {
+      "type": "string",
+      "defaultValue": "DW100c",
+      "allowedValues": [
+        "DW100c",
+        "DW200c",
+        "DW300c",
+        "DW400c",
+        "DW500c",
+        "DW1000c",
+        "DW1500c",
+        "DW2000c",
+        "DW2500c",
+        "DW3000c"
+      ],
+      "metadata": {
+        "description": "Select the SKU of the SQL pool."
+      }
+    },
+    "metadataSync": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Choose whether you want to synchronise metadata."
+      }
+    },
+    "Frequency": {
+      "type": "string",
+      "defaultValue": "Weekdays",
+      "allowedValues": [
+        "Daily",
+        "Weekdays"
+      ],
+      "metadata": {
+        "description": "Choose whether to run schedule every day of the week, or only on weekdays"
+      }
+    },
+    "TIME_ZONE": {
+      "type": "string",
+      "defaultValue": "Eastern Standard Time",
+      "allowedValues": [
+        "Dateline Standard Time",
+        "Samoa Standard Time",
+        "Hawaiian Standard Time",
+        "Alaskan Standard Time",
+        "Pacific Standard Time",
+        "Mountain Standard Time",
+        "Mexico Standard Time 2",
+        "Central Standard Time",
+        "Canada Central Standard Time",
+        "Mexico Standard Time",
+        "Central America Standard Time",
+        "Eastern Standard Time",
+        "Atlantic Standard Time",
+        "Newfoundland and Labrador Standard Time",
+        "E. South America Standard Time",
+        "S.A. Eastern Standard Time",
+        "Greenland Standard Time",
+        "Mid-Atlantic Standard Time",
+        "Azores Standard Time",
+        "Cape Verde Standard Time",
+        "GMT Standard Time",
+        "Greenwich Standard Time",
+        "Central Europe Standard Time",
+        "Central European Standard Time",
+        "Romance Standard Time",
+        "W. Europe Standard Time",
+        "W. Central Africa Standard Time",
+        "E. Europe Standard Time",
+        "Egypt Standard Time",
+        "FLE Standard Time",
+        "GTB Standard Time",
+        "Israel Standard Time",
+        "South Africa Standard Time",
+        "Russian Standard Time",
+        "Arab Standard Time",
+        "E. Africa Standard Time",
+        "Arabic Standard Time",
+        "Iran Standard Time",
+        "Arabian Standard Time",
+        "Caucasus Standard Time",
+        "Transitional Islamic State of Afghanistan Standard Time",
+        "Ekaterinburg Standard Time",
+        "West Asia Standard Time",
+        "India Standard Time",
+        "Nepal Standard Time",
+        "Central Asia Standard Time",
+        "Sri Lanka Standard Time",
+        "Myanmar Standard Time",
+        "North Asia Standard Time",
+        "China Standard Time",
+        "Singapore Standard Time",
+        "Taipei Standard Time",
+        "North Asia East Standard Time",
+        "Korea Standard Time",
+        "Tokyo Standard Time",
+        "Yakutsk Standard Time",
+        "Tasmania Standard Time",
+        "Vladivostok Standard Time",
+        "West Pacific Standard Time",
+        "Central Pacific Standard Time",
+        "Fiji Islands Standard Time",
+        "New Zealand Standard Time",
+        "Tonga Standard Time"
+      ],
+      "metadata": {
+        "description": "Timezone for the schedule. Consult https://msdn.microsoft.com/en-us/library/ms912391(v=winembedded.11).aspx for more information"
+      }
+    },
+    "ResumeTime": {
+      "type": "string",
+      "defaultValue": "09:00 PM ( 21:00 )",
+      "allowedValues": [
+        "12:00 AM (  0:00 )",
+        "01:00 AM (  1:00 )",
+        "02:00 AM (  2:00 )",
+        "03:00 AM (  3:00 )",
+        "04:00 AM (  4:00 )",
+        "05:00 AM (  5:00 )",
+        "06:00 AM (  6:00 )",
+        "07:00 AM (  7:00 )",
+        "08:00 AM (  8:00 )",
+        "09:00 AM (  9:00 )",
+        "10:00 AM ( 10:00 )",
+        "11:00 AM ( 11:00 )",
+        "12:00 PM ( 12:00 )",
+        "01:00 PM ( 13:00 )",
+        "02:00 PM ( 14:00 )",
+        "03:00 PM ( 15:00 )",
+        "04:00 PM ( 16:00 )",
+        "05:00 PM ( 17:00 )",
+        "06:00 PM ( 18:00 )",
+        "07:00 PM ( 19:00 )",
+        "08:00 PM ( 20:00 )",
+        "09:00 PM ( 21:00 )",
+        "10:00 PM ( 22:00 )",
+        "11:00 PM ( 23:00 )"
+      ],
+      "metadata": {
+        "description": "Time of Day when the data warehouse will be resumed"
+      }
+    },
+    "PauseTime": {
+      "type": "string",
+      "defaultValue": "05:00 PM ( 17:00 )",
+      "allowedValues": [
+        "12:00 AM (  0:00 )",
+        "01:00 AM (  1:00 )",
+        "02:00 AM (  2:00 )",
+        "03:00 AM (  3:00 )",
+        "04:00 AM (  4:00 )",
+        "05:00 AM (  5:00 )",
+        "06:00 AM (  6:00 )",
+        "07:00 AM (  7:00 )",
+        "08:00 AM (  8:00 )",
+        "09:00 AM (  9:00 )",
+        "10:00 AM ( 10:00 )",
+        "11:00 AM ( 11:00 )",
+        "12:00 PM ( 12:00 )",
+        "01:00 PM ( 13:00 )",
+        "02:00 PM ( 14:00 )",
+        "03:00 PM ( 15:00 )",
+        "04:00 PM ( 16:00 )",
+        "05:00 PM ( 17:00 )",
+        "06:00 PM ( 18:00 )",
+        "07:00 PM ( 19:00 )",
+        "08:00 PM ( 20:00 )",
+        "09:00 PM ( 21:00 )",
+        "10:00 PM ( 22:00 )",
+        "11:00 PM ( 23:00 )"
+      ],
+      "metadata": {
+        "description": "Time of day when the data warehouse will be paused"
+      }
+    }
+  },
+  "variables": {
+    "synapseName": "[toLower(concat(parameters('companyTla'),parameters('deploymentType')))]",
+    "dlsName": "[toLower(concat('dls',parameters('companyTla'),parameters('deploymentType')))]",
+    "dlsFsName": "[toLower(concat(variables('dlsName'),'fs1'))]",
+    "sqlPoolName": "[toLower(concat(variables('workspaceName'),'p1'))]",
+    "workspaceName": "[toLower(concat(variables('synapseName'),'ws1'))]",
+    "sparkPoolName": "[toLower('synasp1')]",
+    "logicApps": [
+      "SynapsePauseSchedule",
+      "SynapseResumeSchedule"
+    ]
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-06-01",
+      "name": "logicAppPauseDeployment",
+      "properties": {
+        "mode": "Incremental",
+        "templatelink": {
+          "uri": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/pausetemplate.json', parameters('_artifactsLocationSASToken')))]"
+        },
+        "parameters": {
+          "logicAppName": {
+            "value": "[variables('logicApps')[0]]"
+          },
+          "Frequency": {
+            "value": "[parameters('Frequency')]"
+          },
+          "companyTla": {
+            "value": "[parameters('companyTla')]"
+          },
+          "deploymentType": {
+            "value": "[parameters('deploymentType')]"
+          },
+          "TIME_ZONE": {
+            "value": "[parameters('TIME_ZONE')]"
+          },
+          "PauseTime": {
+            "value": "[parameters('PauseTime')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-06-01",
+      "name": "logicAppResumeDeployment",
+      "properties": {
+        "mode": "Incremental",
+        "templatelink": {
+          "uri": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/resumetemplate.json', parameters('_artifactsLocationSASToken')))]"
+        },
+        "parameters": {
+          "logicAppName": {
+            "value": "[variables('logicApps')[1]]"
+          },
+          "Frequency": {
+            "value": "[parameters('Frequency')]"
+          },
+          "companyTla": {
+            "value": "[parameters('companyTla')]"
+          },
+          "deploymentType": {
+            "value": "[parameters('deploymentType')]"
+          },
+          "TIME_ZONE": {
+            "value": "[parameters('TIME_ZONE')]"
+          },
+          "ResumeTime": {
+            "value": "[parameters('ResumeTime')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2019-06-01",
+      "name": "[variables('dlsName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "accessTier": "Hot",
+        "supportsHttpsTrafficOnly": true,
+        "isHnsEnabled": true
+      },
+      "resources": [
+        {
+          "name": "[concat('default/', variables('dlsFsName'))]",
+          "type": "blobServices/containers",
+          "apiVersion": "2019-06-01",
+          "dependsOn": [
+            "[variables('dlsName')]"
+          ],
+          "properties": {
+            "publicAccess": "None"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[variables('workspaceName')]",
+      "location": "[parameters('location')]",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "dependsOn": [
+        "[variables('dlsName')]",
+        "[variables('dlsFsName')]"
+      ],
+      "properties": {
+        "defaultDataLakeStorage": {
+          "accountUrl": "[reference(variables('dlsName')).primaryEndpoints.dfs]",
+          "filesystem": "[variables('dlsFsName')]"
+        },
+        "sqlAdministratorLogin": "[parameters('sqlAdministratorLogin')]",
+        "sqlAdministratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
+        "managedVirtualNetwork": "default"
+      },
+      "resources": [
+        {
+          "condition": "[equals(parameters('allowAllConnections'),'true')]",
+          "type": "firewallrules",
+          "apiVersion": "2019-06-01-preview",
+          "name": "allowAll",
+          "location": "[parameters('location')]",
+          "dependsOn": [ "[variables('workspaceName')]" ],
+          "properties": {
+            "startIpAddress": "0.0.0.0",
+            "endIpAddress": "255.255.255.255"
+          }
+        },
+        {
+          "type": "firewallrules",
+          "apiVersion": "2019-06-01-preview",
+          "name": "AllowAllWindowsAzureIps",
+          "location": "[parameters('location')]",
+          "dependsOn": [ "[variables('workspaceName')]" ],
+          "properties": {
+            "startIpAddress": "0.0.0.0",
+            "endIpAddress": "0.0.0.0"
+          }
+        },
+        {
+          "type": "managedIdentitySqlControlSettings",
+          "apiVersion": "2019-06-01-preview",
+          "name": "default",
+          "location": "[parameters('location')]",
+          "dependsOn": [ "[variables('workspaceName')]" ],
+          "properties": {
+            "grantSqlControlToManagedIdentity": {
+              "desiredState": "Enabled"
+            }
+          }
+        },
+        {
+            "type": "Microsoft.Synapse/workspaces/datasets",
+            "name": "sqlPoolSchema",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "SqlPoolTable",
+                "schema": [],
+                "sqlPool": {
+                    "referenceName": "[variables('sqlPoolName')]",
+                    "type": "SqlPoolReference"
+                }
+            },
+            "dependsOn": [ 
+                "[variables('workspaceName')]",
+                "[variables('sqlPoolName')]"
+            ]
+        },
+        {
+            "type": "Microsoft.Synapse/workspaces/pipelines",
+            "name": "ny_taxicab_pipeline_3",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Create Schema If Not Exists",
+                        "description": "This activity creates the schema, if not exists. The name of the schema is specified in the pipeline parameter 'SchemaName\".",
+                        "type": "Lookup",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.00:03:00",
+                            "retry": 3,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "SqlPoolSource",
+                                "sqlReaderQuery": {
+                                    "value": "IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = '@{pipeline().parameters.SchemaName}')\nBEGIN\nEXEC('CREATE SCHEMA @{pipeline().parameters.SchemaName}')\nselect Count(*) from sys.symmetric_keys;\nEND\nELSE\nBEGIN\n    select Count(*) from sys.symmetric_keys;\nEND",
+                                    "type": "Expression"
+                                }
+                            },
+                            "dataset": {
+                                "referenceName": "sqlPoolSchema",
+                                "type": "DatasetReference"
+                            },
+                            "firstRowOnly": false
+                        }
+                    },
+                    {
+                        "name": "Create create_table Stored Procedure",
+                        "description": "This activity creates a stored procdure named 'create_table'. This stored procedure is used for creating tables inside the dedicated sql pool.",
+                        "type": "Lookup",
+                        "dependsOn": [
+                            {
+                                "activity": "Create Schema If Not Exists",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "0.00:03:00",
+                            "retry": 3,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "SqlPoolSource",
+                                "sqlReaderQuery": {
+                                    "value": "IF NOT EXISTS (select * from sys.objects WHERE object_id = OBJECT_ID(N'[@{pipeline().parameters.SchemaName}].[create_table]'))\n\nBEGIN\n\nEXEC('CREATE PROCEDURE [@{pipeline().parameters.SchemaName}].[create_table]\nAS\nBEGIN\nIF OBJECT_ID(N''[@{pipeline().parameters.SchemaName}].[Date]'', N''U'') IS NULL\nBEGIN\nCREATE TABLE [@{pipeline().parameters.SchemaName}].[Date]\n(\n    [DateID] int NOT NULL,\n    [Date] datetime NULL,\n    [DateBKey] char(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [DayOfMonth] varchar(2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [DaySuffix] varchar(4) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [DayName] varchar(9) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [DayOfWeek] char(1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [DayOfWeekInMonth] varchar(2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [DayOfWeekInYear] varchar(2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [DayOfQuarter] varchar(3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [DayOfYear] varchar(3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [WeekOfMonth] varchar(1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [WeekOfQuarter] varchar(2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [WeekOfYear] varchar(2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [Month] varchar(2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [MonthName] varchar(9) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [MonthOfQuarter] varchar(2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [Quarter] char(1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [QuarterName] varchar(9) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [Year] char(4) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [YearName] char(7) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [MonthYear] char(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [MMYYYY] char(6) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [FirstDayOfMonth] date NULL,\n    [LastDayOfMonth] date NULL,\n    [FirstDayOfQuarter] date NULL,\n    [LastDayOfQuarter] date NULL,\n    [FirstDayOfYear] date NULL,\n    [LastDayOfYear] date NULL,\n    [IsHolidayUSA] bit NULL,\n    [IsWeekday] bit NULL,\n    [HolidayUSA] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    CLUSTERED COLUMNSTORE INDEX\n);\nEND\n\nIF OBJECT_ID(N''[@{pipeline().parameters.SchemaName}].[Geography]'', N''U'') IS NULL\nBEGIN\nCREATE TABLE [@{pipeline().parameters.SchemaName}].[Geography]\n(\n    [GeographyID] int NOT NULL,\n    [ZipCodeBKey] varchar(10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,\n    [County] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [City] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [State] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [Country] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [ZipCode] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    CLUSTERED COLUMNSTORE INDEX\n);\nEND\n\nIF OBJECT_ID(N''[@{pipeline().parameters.SchemaName}].[HackneyLicense]'', N''U'') IS NULL\nBEGIN\nCREATE TABLE [@{pipeline().parameters.SchemaName}].[HackneyLicense]\n(\n    [HackneyLicenseID] int NOT NULL,\n    [HackneyLicenseBKey] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,\n    [HackneyLicenseCode] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    CLUSTERED COLUMNSTORE INDEX\n);\nEND\n\nIF OBJECT_ID(N''[@{pipeline().parameters.SchemaName}].[Medallion]'', N''U'') IS NULL\nBEGIN\nCREATE TABLE [@{pipeline().parameters.SchemaName}].[Medallion]\n(\n    [MedallionID] int NOT NULL,\n    [MedallionBKey] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,\n    [MedallionCode] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    CLUSTERED COLUMNSTORE INDEX\n);\nEND\n\nIF OBJECT_ID(N''[@{pipeline().parameters.SchemaName}].[Time]'', N''U'') IS NULL\nBEGIN\nCREATE TABLE [@{pipeline().parameters.SchemaName}].[Time]\n(\n    [TimeID] int NOT NULL,\n    [TimeBKey] varchar(8) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,\n    [HourNumber] tinyint NOT NULL,\n    [MinuteNumber] tinyint NOT NULL,\n    [SecondNumber] tinyint NOT NULL,\n    [TimeInSecond] int NOT NULL,\n    [HourlyBucket] varchar(15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,\n    [DayTimeBucketGroupKey] int NOT NULL,\n    [DayTimeBucket] varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    CLUSTERED COLUMNSTORE INDEX\n);\nEND\n\nIF OBJECT_ID(N''[@{pipeline().parameters.SchemaName}].[Trip]'', N''U'') IS NULL\nBEGIN\nCREATE TABLE [@{pipeline().parameters.SchemaName}].[Trip]\n(\n    [DateID] int NOT NULL,\n    [MedallionID] int NOT NULL,\n    [HackneyLicenseID] int NOT NULL,\n    [PickupTimeID] int NOT NULL,\n    [DropoffTimeID] int NOT NULL,\n    [PickupGeographyID] int NULL,\n    [DropoffGeographyID] int NULL,\n    [PickupLatitude] float NULL,\n    [PickupLongitude] float NULL,\n    [PickupLatLong] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [DropoffLatitude] float NULL,\n    [DropoffLongitude] float NULL,\n    [DropoffLatLong] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [PassengerCount] int NULL,\n    [TripDurationSeconds] int NULL,\n    [TripDistanceMiles] float NULL,\n    [PaymentType] varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,\n    [FareAmount] money NULL,\n    [SurchargeAmount] money NULL,\n    [TaxAmount] money NULL,\n    [TipAmount] money NULL,\n    [TollsAmount] money NULL,\n    [TotalAmount] money NULL\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    CLUSTERED COLUMNSTORE INDEX\n);\nEND\n\nIF OBJECT_ID(N''[@{pipeline().parameters.SchemaName}].[Weather]'', N''U'') IS NULL\nBEGIN\nCREATE TABLE [@{pipeline().parameters.SchemaName}].[Weather]\n(\n    [DateID] int NOT NULL,\n    [GeographyID] int NOT NULL,\n    [PrecipitationInches] float NOT NULL,\n    [AvgTemperatureFahrenheit] float NOT NULL\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    CLUSTERED COLUMNSTORE INDEX\n);\nEND\n\nEND')\nselect Count(*) from sys.symmetric_keys;\nEND\n\nELSE\n\nBEGIN\nselect Count(*) from sys.symmetric_keys;\nEND",
+                                    "type": "Expression"
+                                }
+                            },
+                            "dataset": {
+                                "referenceName": "sqlPoolSchema",
+                                "type": "DatasetReference"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Execute create_table Stored Procedure",
+                        "description": "This activity executes the stored procedure named 'create_table'.",
+                        "type": "SqlPoolStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "Create create_table Stored Procedure",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "0.00:03:00",
+                            "retry": 3,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "sqlPool": {
+                            "referenceName": "sqlpoolmsft",
+                            "type": "SqlPoolReference"
+                        },
+                        "typeProperties": {
+                            "storedProcedureName": {
+                                "value": "[[@{pipeline().parameters.SchemaName}].[create_table]",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Execute load_data Stored Procedure",
+                        "description": "This activity executes the stored procedure named 'load_data'.",
+                        "type": "SqlPoolStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "Create load_data Stored Procedure",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "0.01:00:00",
+                            "retry": 3,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "sqlPool": {
+                            "referenceName": "sqlpoolmsft",
+                            "type": "SqlPoolReference"
+                        },
+                        "typeProperties": {
+                            "storedProcedureName": {
+                                "value": "[[@{pipeline().parameters.SchemaName}].[load_data]",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    {
+                        "name": "Create load_data Stored Procedure",
+                        "description": "This activity creates a stored procdure named 'load_data'. This stored procedure is used to copy the data from a public blob and to load that data into the tables inside the dedicated sql pool.",
+                        "type": "Lookup",
+                        "dependsOn": [
+                            {
+                                "activity": "Execute create_table Stored Procedure",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "0.00:03:00",
+                            "retry": 3,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "SqlPoolSource",
+                                "sqlReaderQuery": {
+                                    "value": "IF NOT EXISTS (select * from sys.objects WHERE object_id = OBJECT_ID(N'[@{pipeline().parameters.SchemaName}].[load_data]'))\n\nBEGIN\n\nEXEC('CREATE PROCEDURE [@{pipeline().parameters.SchemaName}].[load_data]\nAS\nBEGIN\nCOPY INTO [@{pipeline().parameters.SchemaName}].[Date]\nFROM ''https://nytaxiblob.blob.core.windows.net/2013/Date''\nWITH\n(\n    FILE_TYPE = ''CSV'',\n\tFIELDTERMINATOR = '','',\n\tFIELDQUOTE = ''''\n)\nOPTION (LABEL = ''COPY : Load [@{pipeline().parameters.SchemaName}].[Date] - Taxi dataset'');\n\n\nCOPY INTO [@{pipeline().parameters.SchemaName}].[Geography]\nFROM ''https://nytaxiblob.blob.core.windows.net/2013/Geography''\nWITH\n(\n    FILE_TYPE = ''CSV'',\n\tFIELDTERMINATOR = '','',\n\tFIELDQUOTE = ''''\n)\nOPTION (LABEL = ''COPY : Load [@{pipeline().parameters.SchemaName}].[Geography] - Taxi dataset'');\n\nCOPY INTO [@{pipeline().parameters.SchemaName}].[HackneyLicense]\nFROM ''https://nytaxiblob.blob.core.windows.net/2013/HackneyLicense''\nWITH\n(\n    FILE_TYPE = ''CSV'',\n\tFIELDTERMINATOR = '','',\n\tFIELDQUOTE = ''''\n)\nOPTION (LABEL = ''COPY : Load [@{pipeline().parameters.SchemaName}].[HackneyLicense] - Taxi dataset'');\n\nCOPY INTO [@{pipeline().parameters.SchemaName}].[Medallion]\nFROM ''https://nytaxiblob.blob.core.windows.net/2013/Medallion''\nWITH\n(\n    FILE_TYPE = ''CSV'',\n\tFIELDTERMINATOR = '','',\n\tFIELDQUOTE = ''''\n)\nOPTION (LABEL = ''COPY : Load [@{pipeline().parameters.SchemaName}].[Medallion] - Taxi dataset'');\n\nCOPY INTO [@{pipeline().parameters.SchemaName}].[Time]\nFROM ''https://nytaxiblob.blob.core.windows.net/2013/Time''\nWITH\n(\n    FILE_TYPE = ''CSV'',\n\tFIELDTERMINATOR = '','',\n\tFIELDQUOTE = ''''\n)\nOPTION (LABEL = ''COPY : Load [@{pipeline().parameters.SchemaName}].[Time] - Taxi dataset'');\n\nCOPY INTO [@{pipeline().parameters.SchemaName}].[Weather]\nFROM ''https://nytaxiblob.blob.core.windows.net/2013/Weather''\nWITH\n(\n    FILE_TYPE = ''CSV'',\n\tFIELDTERMINATOR = '','',\n\tFIELDQUOTE = '''',\n\tROWTERMINATOR=''0X0A''\n)\nOPTION (LABEL = ''COPY : Load [@{pipeline().parameters.SchemaName}].[Weather] - Taxi dataset'');\n\nCOPY INTO [@{pipeline().parameters.SchemaName}].[Trip]\nFROM ''https://nytaxiblob.blob.core.windows.net/2013/Trip2013''\nWITH\n(\n    FILE_TYPE = ''CSV'',\n\tFIELDTERMINATOR = ''|'',\n\tFIELDQUOTE = '''',\n\tROWTERMINATOR=''0X0A'',\n\tCOMPRESSION = ''GZIP''\n)\nOPTION (LABEL = ''COPY : Load [@{pipeline().parameters.SchemaName}].[Trip] - Taxi dataset'');\nEND')\nselect Count(*) from sys.symmetric_keys;\nEND\n\nELSE\n\nBEGIN\nselect Count(*) from sys.symmetric_keys;\nEND",
+                                    "type": "Expression"
+                                }
+                            },
+                            "dataset": {
+                                "referenceName": "sqlPoolSchema",
+                                "type": "DatasetReference"
+                            }
+                        }
+                    }
+                ],
+                "parameters": {
+                    "SchemaName": {
+                        "type": "string",
+                        "defaultValue": "dbo"
+                    }
+                },
+                "annotations": [],
+                "dependsOn": [ 
+                    "[variables('workspaceName')]",
+                    "[variables('sqlPoolName')]",
+                    "[concat(variables('workspaceName'), '/datasets/sqlPoolSchema')]"
+                ]
+            }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Synapse/workspaces/sqlPools",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "[parameters('sku')]"
+      },
+      "dependsOn": [
+        "[variables('workspaceName')]"
+      ],
+      "properties": {
+        "createMode": "Default",
+        "collation": "SQL_Latin1_General_CP1_CI_AS"
+      },
+      "resources": [
+        {
+          "condition": "[parameters('metadataSync')]",
+          "type": "metadataSync",
+          "apiVersion": "2019-06-01-preview",
+          "name": "config",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[variables('sqlPoolName')]"
+          ],
+          "properties": {
+            "Enabled": "[parameters('metadataSync')]"
+          }
+        }
+      ]
+    },
+    {
+      "condition": "[equals(parameters('sparkDeployment'),'true')]",
+      "type": "Microsoft.Synapse/workspaces/bigDataPools",
+      "apiVersion": "2019-06-01-preview",
+      "name": "[concat(variables('workspaceName'), '/', variables('sparkPoolName'))]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[variables('workspaceName')]"
+      ],
+      "properties": {
+        "nodeCount": 5,
+        "nodeSizeFamily": "MemoryOptimized",
+        "nodeSize": "[parameters('sparkNodeSize')]",
+        "autoScale": {
+          "enabled": true,
+          "minNodeCount": 3,
+          "maxNodeCount": 40
+        },
+        "autoPause": {
+          "enabled": true,
+          "delayInMinutes": 15
+        },
+        "sparkVersion": "2.4"
+      }
+    },
+    {
+      "scope": "[concat('Microsoft.Storage/storageAccounts/', variables('dlsName'))]",
+      "type": "Microsoft.Authorization/roleAssignments",
+      "apiVersion": "2020-04-01-preview",
+      "name": "[guid(uniqueString(variables('dlsName')))]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[variables('workspaceName')]"
+      ],
+      "properties": {
+        "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]",
+        "principalId": "[reference(resourceId('Microsoft.Synapse/workspaces', variables('workspaceName')), '2019-06-01-preview', 'Full').identity.principalId]",
+        "principalType": "ServicePrincipal"
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-06-01",
+      "name": "MSIRBACOnResourceGroup0",
+      "dependsOn": [
+        "logicAppResumeDeployment",
+        "logicAppPauseDeployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templatelink": {
+          "uri": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/logicapproleassignments.json', parameters('_artifactsLocationSASToken')))]"
+        },
+        "parameters": {
+          "logicAppName": {
+            "value": "[variables('logicApps')[0]]"
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-06-01",
+      "name": "MSIRBACOnResourceGroup1",
+      "dependsOn": [
+        "logicAppResumeDeployment",
+        "logicAppPauseDeployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templatelink": {
+          "uri": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/logicapproleassignments.json', parameters('_artifactsLocationSASToken')))]"
+        },
+        "parameters": {
+          "logicAppName": {
+            "value": "[variables('logicApps')[1]]"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -385,11 +385,11 @@
         "sqlAdministratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
         "managedVirtualNetwork": "default",
         "workspaceRepositoryConfiguration": {
+          "type": "WorkspaceGitHubConfiguration",
           "accountName": "osamaemumba",
           "collaborationBranch": "main",
           "repositoryName": "synapse-test",
-          "rootFolder": "/",
-          "type": "WorkspaceGitHubConfiguration"
+          "rootFolder": "/"
         }
       },
       "resources": [

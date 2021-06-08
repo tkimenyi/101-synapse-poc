@@ -387,7 +387,7 @@
         "workspaceRepositoryConfiguration": {
           "hostName": "https://github.com/",
           "accountName": "osamaemumba",
-          "collaborationBranch": "[toLower(concat(variables('synapseName'),'collab_branch'))]",
+          "collaborationBranch": "main",
           "repositoryName": "synapse-test",
           "rootFolder": "/",
           "type": "WorkspaceGitHubConfiguration"

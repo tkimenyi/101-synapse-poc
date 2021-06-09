@@ -444,7 +444,7 @@
             },
             "dependsOn": [ 
                 "[variables('workspaceName')]",
-                "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]"
+                "[variables('sqlPoolName')]"
             ]
         },
         {

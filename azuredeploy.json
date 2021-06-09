@@ -454,7 +454,7 @@
             "location": "[parameters('location')]",
             "dependsOn": [ 
                 "[variables('workspaceName')]",
-                "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]",
+                "[variables('sqlPoolName')]",
                 "[concat(variables('workspaceName'), '/datasets/sqlPoolSchema')]"
             ],
             "properties": {

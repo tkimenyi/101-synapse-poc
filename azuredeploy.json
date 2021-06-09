@@ -388,9 +388,8 @@
           "type": "WorkspaceGitHubConfiguration",
           "hostName": "https://github.com/",
           "accountName": "osamaemumba",
-          "collaborationBranch": "main",
           "repositoryName": "synapse-test",
-          "rootFolder": "/"
+          "collaborationBranch": "main"
         }
       },
       "resources": [

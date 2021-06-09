@@ -430,7 +430,7 @@
         },
         {
             "type": "Microsoft.Synapse/workspaces/datasets",
-            "name": "sqlPoolSchema",
+            "name": "[concat(variables('workspaceName'), '/sqlPoolSchema')]",
             "apiVersion": "2018-06-01",
             "location": "[parameters('location')]",
             "properties": {
@@ -449,7 +449,7 @@
         },
         {
             "type": "Microsoft.Synapse/workspaces/pipelines",
-            "name": "ny_taxicab_pipeline_3",
+            "name": "[concat(variables('workspaceName'), '/ny_taxicab_pipeline_3')]",
             "apiVersion": "2018-06-01",
             "location": "[parameters('location')]",
             "properties": {

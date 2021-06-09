@@ -619,13 +619,13 @@
                         "defaultValue": "dbo"
                     }
                 },
-                "annotations": [],
-                "dependsOn": [ 
-                    "[variables('workspaceName')]",
-                    "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]",
-                    "[concat(variables('workspaceName'), '/datasets/sqlPoolSchema')]"
-                ]
-            }
+                "annotations": []
+            },
+            "dependsOn": [ 
+                "[variables('workspaceName')]",
+                "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]",
+                "[concat(variables('workspaceName'), '/datasets/sqlPoolSchema')]"
+            ]
         }
       ]
     },

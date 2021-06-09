@@ -452,6 +452,11 @@
             "name": "[concat(variables('workspaceName'), '/ny_taxicab_pipeline_3')]",
             "apiVersion": "2018-06-01",
             "location": "[parameters('location')]",
+            "dependsOn": [ 
+                "[variables('workspaceName')]",
+                "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]",
+                "[concat(variables('workspaceName'), '/datasets/sqlPoolSchema')]"
+            ],
             "properties": {
                 "activities": [
                     {
@@ -620,12 +625,7 @@
                     }
                 },
                 "annotations": []
-            },
-            "dependsOn": [ 
-                "[variables('workspaceName')]",
-                "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]",
-                "[concat(variables('workspaceName'), '/datasets/sqlPoolSchema')]"
-            ]
+            }
         }
       ]
     },

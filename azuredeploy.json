@@ -455,7 +455,7 @@
             "dependsOn": [ 
                 "[variables('workspaceName')]",
                 "[variables('sqlPoolName')]",
-                "[concat(variables('workspaceName'), '/datasets/sqlPoolSchema')]"
+                "sqlPoolSchema"
             ],
             "properties": {
                 "activities": [

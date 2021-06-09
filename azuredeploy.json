@@ -386,7 +386,7 @@
         "managedVirtualNetwork": "default",
         "workspaceRepositoryConfiguration": {
           "type": "WorkspaceGitHubConfiguration",
-          "hostName": "https://github.com/",
+          "hostName": "https://github.com",
           "accountName": "osamaemumba",
           "repositoryName": "synapse-test",
           "collaborationBranch": "main"

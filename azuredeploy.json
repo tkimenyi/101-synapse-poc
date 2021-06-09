@@ -438,13 +438,13 @@
                 "type": "SqlPoolTable",
                 "schema": [],
                 "sqlPool": {
-                    "referenceName": "[variables('sqlPoolName')]",
+                    "referenceName": "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]",
                     "type": "SqlPoolReference"
                 }
             },
             "dependsOn": [ 
                 "[variables('workspaceName')]",
-                "[variables('sqlPoolName')]"
+                "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]"
             ]
         },
         {
@@ -622,7 +622,7 @@
                 "annotations": [],
                 "dependsOn": [ 
                     "[variables('workspaceName')]",
-                    "[variables('sqlPoolName')]",
+                    "[concat(variables('workspaceName'), '/', variables('sqlPoolName'))]",
                     "[concat(variables('workspaceName'), '/datasets/sqlPoolSchema')]"
                 ]
             }

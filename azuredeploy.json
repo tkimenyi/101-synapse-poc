@@ -531,7 +531,7 @@
         },
         {
           "name": "transparenDataEncriptionConfig",
-          "type": "Microsoft.Synapse/workspaces/sqlPools/transparentDataEncryption",
+          "type": "transparentDataEncryption",
           "apiVersion": "2021-03-01",
           "dependsOn": [
             "[variables('sqlPoolName')]"

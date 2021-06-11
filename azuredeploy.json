@@ -537,7 +537,7 @@
             "[variables('sqlPoolName')]"
           ],
           "properties": {
-            "status": "enabled"
+            "status": "Enabled"
           }
         }
       ]

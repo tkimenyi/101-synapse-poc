@@ -454,7 +454,6 @@
         },
         "sqlAdministratorLogin": "[parameters('sqlAdministratorLogin')]",
         "sqlAdministratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
-        "managedVirtualNetwork": "default",
         "workspaceRepositoryConfiguration": {
           "type": "WorkspaceGitHubConfiguration",
           "hostName": "https://github.com",
@@ -528,6 +527,17 @@
           ],
           "properties": {
             "Enabled": "[parameters('metadataSync')]"
+          }
+        },
+        {
+          "name": "transparenDataEncriptionConfig",
+          "type": "Microsoft.Synapse/workspaces/sqlPools/transparentDataEncryption",
+          "apiVersion": "2021-03-01",
+          "dependsOn": [
+            "[variables('sqlPoolName')]"
+          ],
+          "properties": {
+            "status": "enabled"
           }
         }
       ]

@@ -530,7 +530,7 @@
           }
         },
         {
-          "name": "transparenDataEncriptionConfig",
+          "name": "current",
           "type": "transparentDataEncryption",
           "apiVersion": "2021-03-01",
           "dependsOn": [

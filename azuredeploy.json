@@ -253,7 +253,20 @@
       "metadata": {
         "description": "Time of day when the data warehouse will be paused"
       }
-    }
+    },
+    "keyVaultName": {
+        "type": "string",
+        "defaultValue": "demokv",
+        "metadata": {
+          "description": "Specifies the name of the key vault."
+        }
+      },
+      "azureUserObjectId": {
+          "type": "string",
+          "metadata": {
+            "description": "Kindly give your Object Id so that full permissions to key vault can be assigned to you. To get your Object Id, search 'Users' in the search bar in azure portal. Then click on your name and in the 'Profile' tab your Object Id is present under 'Identity' section"
+          }
+      }
   },
   "variables": {
     "synapseName": "[toLower(concat(parameters('companyTla'),parameters('deploymentType')))]",
@@ -262,12 +275,70 @@
     "sqlPoolName": "[toLower(concat(variables('workspaceName'),'p1'))]",
     "workspaceName": "[toLower(concat(variables('synapseName'),'ws1'))]",
     "sparkPoolName": "[toLower('synasp1')]",
+    "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', variables('dlsName'))]",
     "logicApps": [
       "SynapsePauseSchedule",
       "SynapseResumeSchedule"
     ]
   },
   "resources": [
+    {
+      "name": "keyVaultDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2018-05-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('dlsName'))]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templatelink": {
+          "uri": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/keyvault.json', parameters('_artifactsLocationSASToken')))]"
+        },
+        "parameters": {
+            "location": {
+                "value": "[parameters('location')]"
+            },
+            "keyVaultName": {
+                "value": "[parameters('keyVaultName')]"
+            },
+            "sqlAdministratorLoginPassword": {
+                "value": "[parameters('sqlAdministratorLoginPassword')]"
+            },
+            "datalakeAccountAccessKeyValue": {
+                "value": "[listKeys(variables('storageAccountId'), '2019-06-01').keys[0].value]"
+            }
+        }
+      }
+    },
+    {
+        "name": "keyVaultPermissionsUpdate",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2018-05-01",
+        "dependsOn": [
+            "[variables('workspaceName')]",
+            "[resourceId('Microsoft.Resources/deployments','keyVaultDeployment')]"
+        ],
+        "properties": {
+          "mode": "Incremental",
+          "templatelink": {
+            "uri": "[uri(parameters('_artifactsLocation'), concat('nestedtemplates/keyvaultpermissionsupdate.json', parameters('_artifactsLocationSASToken')))]"
+          },
+          "parameters": {
+              "location": {
+                  "value": "[parameters('location')]"
+              },
+              "keyVaultName": {
+                  "value": "[parameters('keyVaultName')]"
+              },
+              "workspaceName": {
+                  "value": "[variables('workspaceName')]"
+              },
+              "azureUserObjectId": {
+                  "value": "[parameters('azureUserObjectId')]"
+              }
+          }
+        }
+    },
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-06-01",
@@ -383,7 +454,6 @@
         },
         "sqlAdministratorLogin": "[parameters('sqlAdministratorLogin')]",
         "sqlAdministratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
-        "managedVirtualNetwork": "default",
         "workspaceRepositoryConfiguration": {
           "type": "WorkspaceGitHubConfiguration",
           "hostName": "https://github.com",
@@ -457,6 +527,17 @@
           ],
           "properties": {
             "Enabled": "[parameters('metadataSync')]"
+          }
+        },
+        {
+          "name": "current",
+          "type": "transparentDataEncryption",
+          "apiVersion": "2021-03-01",
+          "dependsOn": [
+            "[variables('sqlPoolName')]"
+          ],
+          "properties": {
+            "status": "Enabled"
           }
         }
       ]

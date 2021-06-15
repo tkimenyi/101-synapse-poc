@@ -267,7 +267,7 @@
             "description": "Kindly give your Object Id so that full permissions to key vault can be assigned to you. To get your Object Id, search 'Users' in the search bar in azure portal. Then click on your name and in the 'Profile' tab your Object Id is present under 'Identity' section"
           }
       },
-      "gitUsername": {
+      "githubUsername": {
           "type": "string",
           "metadata": {
             "description": "Username of your git account hosting synapse workspace resources"
@@ -463,7 +463,7 @@
         "workspaceRepositoryConfiguration": {
           "type": "WorkspaceGitHubConfiguration",
           "hostName": "https://github.com",
-          "accountName": "[parameters('gitUsername')]",
+          "accountName": "[parameters('githubUsername')]",
           "repositoryName": "synapse-test",
           "collaborationBranch": "main"
         }

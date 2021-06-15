@@ -270,7 +270,7 @@
       "githubUsername": {
           "type": "string",
           "metadata": {
-            "description": "Username of your git account hosting synapse workspace resources"
+            "description": "Username of your github account hosting synapse workspace resources"
           }
       }
   },

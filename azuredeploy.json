@@ -256,7 +256,6 @@
     },
     "keyVaultName": {
         "type": "string",
-        "defaultValue": "demokv",
         "metadata": {
           "description": "Specifies the name of the key vault."
         }
@@ -275,12 +274,13 @@
       }
   },
   "variables": {
-    "synapseName": "[toLower(concat(parameters('companyTla'),parameters('deploymentType')))]",
-    "dlsName": "[toLower(concat('dls',parameters('companyTla'),parameters('deploymentType')))]",
-    "dlsFsName": "[toLower(concat(variables('dlsName'),'fs1'))]",
+    "synapseName": "[toLower(concat(parameters('companyTla'),uniquestring(resourceGroup().id),parameters('deploymentType')))]",
+    "dlsName": "[toLower(concat('dls',parameters('companyTla'),uniquestring(resourceGroup().id),parameters('deploymentType')))]",
+    "dlsFsName": "[toLower(concat('dls',parameters('companyTla'),parameters('deploymentType'),'fs1'))]",
     "sqlPoolName": "[toLower(concat(variables('workspaceName'),'p1'))]",
     "workspaceName": "[toLower(concat(variables('synapseName'),'ws1'))]",
-    "sparkPoolName": "[toLower('synasp1')]",
+    "sparkPoolName": "[toLower(concat(variables('workspaceName'),'sp1'))]",
+    "keyVaultName": "[toLower(concat('kv',parameters('companyTla'),uniquestring(resourceGroup().id),parameters('deploymentType')))]",
     "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', variables('dlsName'))]",
     "logicApps": [
       "SynapsePauseSchedule",
@@ -305,7 +305,7 @@
                 "value": "[parameters('location')]"
             },
             "keyVaultName": {
-                "value": "[parameters('keyVaultName')]"
+                "value": "[variables('keyVaultName')]"
             },
             "sqlAdministratorLoginPassword": {
                 "value": "[parameters('sqlAdministratorLoginPassword')]"
@@ -334,7 +334,7 @@
                   "value": "[parameters('location')]"
               },
               "keyVaultName": {
-                  "value": "[parameters('keyVaultName')]"
+                  "value": "[variables('keyVaultName')]"
               },
               "workspaceName": {
                   "value": "[variables('workspaceName')]"

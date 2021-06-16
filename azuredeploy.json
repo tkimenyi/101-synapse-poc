@@ -254,12 +254,6 @@
         "description": "Time of day when the data warehouse will be paused"
       }
     },
-    "keyVaultName": {
-        "type": "string",
-        "metadata": {
-          "description": "Specifies the name of the key vault."
-        }
-      },
       "azureUserObjectId": {
           "type": "string",
           "metadata": {

@@ -254,6 +254,17 @@
         "description": "Time of day when the data warehouse will be paused"
       }
     },
+    "enableTransparentDataEncryption": {
+        "type": "string",
+        "defaultValue": "Enabled",
+        "allowedValues": [
+          "Enabled",
+          "Disabled"
+        ],
+        "metadata": {
+          "description": "Enable or Disable Transparent Data Encryption on SQL pool"
+        }
+    },
       "azureUserObjectId": {
           "type": "string",
           "metadata": {
@@ -537,7 +548,7 @@
             "[variables('sqlPoolName')]"
           ],
           "properties": {
-            "status": "Enabled"
+            "status": "[parameters('enableTransparentDataEncryption')]"
           }
         }
       ]

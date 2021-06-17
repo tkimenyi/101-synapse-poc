@@ -445,7 +445,7 @@
           "hostName": "https://github.com",
           "accountName": "[parameters('githubUsername')]",
           "repositoryName": "101-synapse-poc",
-          "rootFolder": "synapse-test",
+          "rootFolder": "/synapse-test",
           "collaborationBranch": "main"
         }
       },

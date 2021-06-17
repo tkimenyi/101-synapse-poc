@@ -321,9 +321,6 @@
               },
               "workspaceName": {
                   "value": "[variables('workspaceName')]"
-              },
-              "azureUserObjectId": {
-                  "value": "[parameters('azureUserObjectId')]"
               }
           }
         }

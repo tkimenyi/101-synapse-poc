@@ -248,27 +248,12 @@
           "description": "Enable or Disable Transparent Data Encryption on SQL pool"
         }
     },
-<<<<<<< HEAD
-      "azureUserObjectId": {
-          "type": "string",
-          "metadata": {
-            "description": "Kindly give your Object Id so that full permissions to key vault can be assigned to you. To get your Object Id, search 'Users' in the search bar in azure portal. Then click on your name and in the 'Profile' tab your Object Id is present under 'Identity' section"
-          }
-      },
-      "githubUsername": {
-          "type": "string",
-          "metadata": {
-            "description": "Username of your github account hosting synapse workspace resources"
-          }
-      }
-=======
     "githubUsername": {
         "type": "string",
         "metadata": {
           "description": "Username of your github account hosting synapse workspace resources"
         }
     }
->>>>>>> main
   },
   "variables": {
     "deploymentType": "poc",
@@ -278,11 +263,7 @@
     "sqlPoolName": "[toLower(concat(variables('workspaceName'),'p1'))]",
     "workspaceName": "[toLower(concat(variables('synapseName'),'ws1'))]",
     "sparkPoolName": "[toLower('ws1sparkpool1')]",
-<<<<<<< HEAD
-    "keyVaultName": "[toLower(concat('kv',parameters('companyTla'),uniquestring(resourceGroup().id),parameters('deploymentType')))]",
-=======
     "keyVaultName": "[toLower(concat('kv',parameters('companyTla'),uniquestring(resourceGroup().id),variables('deploymentType')))]",
->>>>>>> main
     "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', variables('dlsName'))]",
     "logicApps": [
       "SynapsePauseSchedule",

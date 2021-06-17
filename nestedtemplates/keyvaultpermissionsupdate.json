@@ -19,12 +19,6 @@
         "metadata": {
             "description": "The name you provide will be appended with a unique sting to make it globally available. The name can contain only letters, numbers and hyphens. The first and last characters must be a letter or number. Spaces are not allowed."
         }
-      },
-      "azureUserObjectId": {
-          "type": "string",
-          "metadata": {
-              "description": "Kindly give your Object Id so that full permissions to key vault can be assigned to you"
-            }
       }
     },
 
@@ -50,58 +44,6 @@
                         "Get"
                     ],
                     "certificates": []
-                }
-            },
-            {
-                "tenantId": "[variables('tenantId')]",
-                "objectId": "[parameters('azureUserObjectId')]",
-                "permissions": {
-                    "keys": [
-                        "Get",
-                        "List",
-                        "Update",
-                        "Create",
-                        "Import",
-                        "Delete",
-                        "Recover",
-                        "Backup",
-                        "Restore",
-                        "Decrypt",
-                        "Encrypt",
-                        "UnwrapKey",
-                        "WrapKey",
-                        "Verify",
-                        "Sign",
-                        "Purge"
-                    ],
-                    "secrets": [
-                        "Get",
-                        "List",
-                        "Set",
-                        "Delete",
-                        "Recover",
-                        "Backup",
-                        "Restore",
-                        "Purge"
-                    ],
-                    "certificates": [
-                        "Get",
-                        "List",
-                        "Update",
-                        "Create",
-                        "Import",
-                        "Delete",
-                        "Recover",
-                        "Backup",
-                        "Restore",
-                        "ManageContacts",
-                        "ManageIssuers",
-                        "GetIssuers",
-                        "ListIssuers",
-                        "SetIssuers",
-                        "DeleteIssuers",
-                        "Purge"
-                    ]
                 }
             }
         ],

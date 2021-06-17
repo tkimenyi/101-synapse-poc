@@ -444,7 +444,8 @@
           "type": "WorkspaceGitHubConfiguration",
           "hostName": "https://github.com",
           "accountName": "[parameters('githubUsername')]",
-          "repositoryName": "synapse-test",
+          "repositoryName": "101-synapse-poc",
+          "rootFolder": "synapse-test",
           "collaborationBranch": "main"
         }
       },

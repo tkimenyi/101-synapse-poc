@@ -350,8 +350,8 @@
           "deploymentType": {
             "value": "[variables('deploymentType')]"
           },
-          "TIME_ZONE": {
-            "value": "[parameters('TIME_ZONE')]"
+          "timeZone": {
+            "value": "[parameters('timeZone')]"
           },
           "PauseTime": {
             "value": "[parameters('PauseTime')]"
@@ -384,8 +384,8 @@
           "deploymentType": {
             "value": "[variables('deploymentType')]"
           },
-          "TIME_ZONE": {
-            "value": "[parameters('TIME_ZONE')]"
+          "timeZone": {
+            "value": "[parameters('timeZone')]"
           },
           "ResumeTime": {
             "value": "[parameters('ResumeTime')]"

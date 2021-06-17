@@ -237,12 +237,23 @@
         "description": "Time of day when the data warehouse will be paused"
       }
     },
-      "githubUsername": {
-          "type": "string",
-          "metadata": {
-            "description": "Username of your github account hosting synapse workspace resources"
-          }
-      }
+    "enableTransparentDataEncryption": {
+        "type": "string",
+        "defaultValue": "Enabled",
+        "allowedValues": [
+          "Enabled",
+          "Disabled"
+        ],
+        "metadata": {
+          "description": "Enable or Disable Transparent Data Encryption on SQL pool"
+        }
+    },
+    "githubUsername": {
+        "type": "string",
+        "metadata": {
+          "description": "Username of your github account hosting synapse workspace resources"
+        }
+    }
   },
   "variables": {
     "deploymentType": "poc",
@@ -515,7 +526,7 @@
             "[variables('sqlPoolName')]"
           ],
           "properties": {
-            "status": "Enabled"
+            "status": "[parameters('enableTransparentDataEncryption')]"
           }
         }
       ]

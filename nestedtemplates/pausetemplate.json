@@ -17,7 +17,7 @@
     "Frequency": {
       "type": "string"
     },
-    "TIME_ZONE": {
+    "timeZone": {
       "type": "string"
     },
     "PauseTime": {
@@ -84,7 +84,7 @@
                       "ResourceGroupName": "[resourceGroup().name]",
                       "SubscriptionId": "[subscription().subscriptionId]",
                       "TenantId": "[subscription().tenantId]",
-                      "ScheduleTimeZone": "[parameters('TIME_ZONE')]",
+                      "ScheduleTimeZone": "[parameters('timeZone')]",
                       "PauseTime": "[variables('pauseTimeString')]"
                     }
                   }
@@ -284,7 +284,7 @@
               "recurrence": {
                 "frequency": "Week",
                 "interval": 1,
-                "timeZone": "[parameters('TIME_ZONE')]",
+                "timeZone": "[parameters('timeZone')]",
                 "startTime": "2019-01-01T00:00:00Z",
                 "schedule": {
                   "weekDays": "[variables('recurrenceSchedule')]",

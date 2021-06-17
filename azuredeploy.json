@@ -99,7 +99,7 @@
         "description": "Choose whether to run schedule every day of the week, or only on weekdays"
       }
     },
-    "TIME_ZONE": {
+    "timeZone": {
       "type": "string",
       "defaultValue": "Eastern Standard Time",
       "allowedValues": [

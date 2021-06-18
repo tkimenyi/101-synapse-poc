@@ -5,9 +5,10 @@
 ## Table Of Contents
 
 1. Introduction
-2. Prerequisites
-3. Deployment
-4. Post Deployment
+2. Purpose
+3. Prerequisites
+4. Deployment
+5. Post Deployment
 
 ## Introduction
 

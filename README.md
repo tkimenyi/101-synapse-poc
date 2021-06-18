@@ -32,11 +32,14 @@ This template allows the Administrator to deploy a Proof-of-Concept environment 
 
 ## Prerequisites
 
-- Owner role (oOtherwise Contributor + User Access Administrator roles) for the Azure Subscription the template being deployed in. This is for creation of a separate Proof-of-Concept Resource Group and to delegate roles necessary for this proof of concept.
+- Owner role (otherwise Contributor + User Access Administrator roles) for the Azure Subscription the template being deployed in. This is for creation of a separate Proof-of-Concept Resource Group and to delegate roles necessary for this proof of concept.
 - Fork out [this github repository](https://github.com/osamaemumba/101-synapse-poc) into your github account.
 
 ## Deployment
+Click the following button to deploy all the resources. And provide the values for:
 
+- Resource group (create new)
+- 
 [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fosamaemumba%2F101-synapse-poc%2Fmain%2Fazuredeploy.json)
 
 

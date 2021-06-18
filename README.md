@@ -33,7 +33,7 @@ This template allows the Administrator to deploy a Proof-of-Concept environment 
 ## Prerequisites
 
 - Owner role (oOtherwise Contributor + User Access Administrator roles) for the Azure Subscription the template being deployed in. This is for creation of a separate Proof-of-Concept Resource Group and to delegate roles necessary for this proof of concept.
-- Fork out ![this github repository](https://github.com/osamaemumba/101-synapse-poc) into your github account.
+- Fork out [this github repository](https://github.com/osamaemumba/101-synapse-poc) into your github account.
 
 ## Deployment
 

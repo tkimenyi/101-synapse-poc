@@ -1,17 +1,15 @@
 # Azure Synapse Proof-of-Concept
 
+![Synapse Analytics](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/synapse1.png)
+
 ## Table Of Contents
 
 1. Introduction
-2. Prerequisite
+2. Prerequisites
 3. Deployment
 4. Post Deployment
 
 ## Introduction
-
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fosamaemumba%2F101-synapse-poc%2Fmain%2Fazuredeploy.json)
-
-![Synapse Analytics](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/synapse1.png)
 
 This template deploys necessary resources to run an Azure Synapse Proof-of-Concept. 
 Following resources are deployed with this template along with some RBAC role assignments:
@@ -39,11 +37,14 @@ The data pipeline inside the Synapse Workspace gets Newyork Taxi trip and fare d
 
 This template allows the Administrator to deploy a Proof-of-Concept environment of Azure Synapse Analytics with some pre-set parameters. This allows more time to focus on the Proof-of-Concept at hand and test the service.
 
-Using the Getting Started wizard inside of the workspace is recommended to use sample data if you do not have your own with you to add to the Storage Account.
-
 ## Prerequisites
 
 - Owner to the Azure Subscription being deployed. This is for creation of a separate Proof-of-Concept Resource Group and to delegate roles necessary for this proof of concept
+
+## Deployment
+
+[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fosamaemumba%2F101-synapse-poc%2Fmain%2Fazuredeploy.json)
+
 
 ## Post Deployment
 

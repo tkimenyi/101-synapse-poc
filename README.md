@@ -1,37 +1,32 @@
 # Azure Synapse Proof-of-Concept
 
-![Azure Public Test Date](https://azurequickstartsservice.blob.core.windows.net/badges/101-synapse-poc/PublicLastTestDate.svg)
-![Azure Public Test Result](https://azurequickstartsservice.blob.core.windows.net/badges/101-synapse-poc/PublicDeployment.svg)
+## Table Of Contents
 
-![Azure US Gov Last Test Date](https://azurequickstartsservice.blob.core.windows.net/badges/101-synapse-poc/FairfaxLastTestDate.svg)
-![Azure US Gov Last Test Result](https://azurequickstartsservice.blob.core.windows.net/badges/101-synapse-poc/FairfaxDeployment.svg)
+1. Introduction
+2. Prerequisite
+3. Deployment
+4. Post Deployment
 
-![Best Practice Check](https://azurequickstartsservice.blob.core.windows.net/badges/101-synapse-poc/BestPracticeResult.svg)
-![Cred Scan Check](https://azurequickstartsservice.blob.core.windows.net/badges/101-synapse-poc/CredScanResult.svg)
+## Introduction
 
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fosamaemumba%2F101-synapse-poc%2Fmain%2Fazuredeploy.json) [![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fosamaemumba%2F101-synapse-poc%2Fmain%2Fazuredeploy.json)
+[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fosamaemumba%2F101-synapse-poc%2Fmain%2Fazuredeploy.json)
 
-![Synapse Analytics](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-synapse-poc/images/synapse1.png)
+![Synapse Analytics](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/synapse1.png)
 
-This template deploys necessary resources to run an Azure Synapse Proof-of-Concept
+This template deploys necessary resources to run an Azure Synapse Proof-of-Concept. 
+Following resources are deployed with this template along with some RBAC role assignments:
 
-This template deploys the following:
-
-- An Azure Synapse Workspace
-  - (OPTIONAL) Allows All connections in by default (Firewall IP Addresses)
-  - Allows Azure Services to access the workspace by default
-  - Managed Virtual Network is Enabled
+- An Azure Synapse Workspace with batch data pipeline and other required resources
 - An Azure Synapse SQL Pool
-- (OPTIONAL) Apache Spark Pool
-  - Auto-paused set to 15 minutes of idling
+- An optional Apache Spark Pool
 - Azure Data Lake Storage Gen2 account
-  - Azure Synapse Workspace identity given Storage Blob Data Contributor to the Storage Account
-    - A new File System inside the Storage Account to be used by Azure Synapse
+- A new File System inside the Storage Account to be used by Azure Synapse
 - A Logic App to Pause the SQL Pool at defined schedule
-  - The Logic App will check for Active Queries. If there are active queries, it will wait 5 minutes and check again until there are none before pausing
 - A Logic App to Resume the SQL Pool at defined schedule
-- Both Logic App managed identities are given Contributor rights to the Resource Group
-- Grants the Workspace identity CONTROL to all SQL pools and SQL on-demand pool
+- A key vault to store the secrets
+
+The data pipeline inside the Synapse Workspace gets Newyork Taxi trip and fare data, joins them and perform aggregations on them to give the final aggregated results. Other resources include datasets, linked services and dataflows. All resources are completely parameterized and all the secrets are stored in the key vault. These secrets are fetched inside the linked services using key vault linked service. The Logic App will check for Active Queries. If there are active queries, it will wait 5 minutes and check again until there are none before pausing
+
 
 ## Index
 

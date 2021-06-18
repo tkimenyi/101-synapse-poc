@@ -36,12 +36,30 @@ This template allows the Administrator to deploy a Proof-of-Concept environment 
 - Fork out [this github repository](https://github.com/osamaemumba/101-synapse-poc) into your github account.
 
 ## Deployment
-Click the following button to deploy all the resources. And provide the values for:
+Click 'Deploy To Azure' button given below to deploy all the resources. 
 
-- Resource group (create new)
-- 
 [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fosamaemumba%2F101-synapse-poc%2Fmain%2Fazuredeploy.json)
 
+Provide the values for:
+
+- Resource group (create new)
+- Region
+- Company Tla
+- Option (true or false) for Allow All Connections
+- Option (true or false) for Spark Deployment
+- Spark Node Size (Small, Medium, large) if Spark Deployment is set to true
+- Sql Administrator Login
+- Sql Administrator Login Password
+- Sku
+- Option (true or false) for Metadata Sync
+- Frequency
+- Time Zone
+- Resume Time
+- Pause Time
+- Option (Enabled or Disabled) for Transparent Data Encryption
+- Github Username (username for the account where [this github repository](https://github.com/osamaemumba/101-synapse-poc) was forked out into)
+
+Click 'Review + Create'. On successfull validation, click 'Create'.
 
 ## Post Deployment
 

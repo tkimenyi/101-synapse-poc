@@ -25,14 +25,6 @@ Following resources are deployed with this template along with some RBAC role as
 
 The data pipeline inside the Synapse Workspace gets Newyork Taxi trip and fare data, joins them and perform aggregations on them to give the final aggregated results. Other resources include datasets, linked services and dataflows. All resources are completely parameterized and all the secrets are stored in the key vault. These secrets are fetched inside the linked services using key vault linked service. The Logic App will check for Active Queries. If there are active queries, it will wait 5 minutes and check again until there are none before pausing
 
-
-## Index
-
-- [Purpose](https://github.com/Azure/azure-quickstart-templates/tree/master/101-synapse-poc#purpose)
-- [Prerequisites](https://github.com/Azure/azure-quickstart-templates/tree/master/101-synapse-poc#prerequisites)
-- [Deploy to Azure](https://github.com/Azure/azure-quickstart-templates/tree/master/101-synapse-poc#deploy-to-azure)
-- [Post Deployment](https://github.com/Azure/azure-quickstart-templates/tree/master/101-synapse-poc#post-deployment)
-
 ## Purpose
 
 This template allows the Administrator to deploy a Proof-of-Concept environment of Azure Synapse Analytics with some pre-set parameters. This allows more time to focus on the Proof-of-Concept at hand and test the service.

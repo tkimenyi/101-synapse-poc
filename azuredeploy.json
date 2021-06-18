@@ -226,7 +226,7 @@
         "description": "Time of day when the data warehouse will be paused"
       }
     },
-    "enableTransparentDataEncryption": {
+    "transparentDataEncryption": {
         "type": "string",
         "defaultValue": "Enabled",
         "allowedValues": [
@@ -515,7 +515,7 @@
             "[variables('sqlPoolName')]"
           ],
           "properties": {
-            "status": "[parameters('enableTransparentDataEncryption')]"
+            "status": "[parameters('transparentDataEncryption')]"
           }
         }
       ]

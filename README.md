@@ -32,7 +32,8 @@ This template allows the Administrator to deploy a Proof-of-Concept environment 
 
 ## Prerequisites
 
-- Owner to the Azure Subscription being deployed. This is for creation of a separate Proof-of-Concept Resource Group and to delegate roles necessary for this proof of concept
+- Contributor and User Access Administrator roles for the Azure Subscription the template being deployed in. This is for creation of a separate Proof-of-Concept Resource Group and to delegate roles necessary for this proof of concept.
+- 
 
 ## Deployment
 

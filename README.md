@@ -59,7 +59,9 @@ Provide the values for:
 - Option (Enabled or Disabled) for Transparent Data Encryption
 - Github Username (username for the account where [this github repository](https://github.com/osamaemumba/101-synapse-poc) was forked out into)
 
-Click 'Review + Create'. On successfull validation, click 'Create'.
+Click 'Review + Create'.
+
+On successfull validation, click 'Create'.
 
 ## Post Deployment
 

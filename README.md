@@ -68,10 +68,10 @@ On successfull validation, click 'Create'.
 - After the deployment is complete, click 'Go to resource group'.
 - You'll see all the resources deployed in the resource group.
 - Click on the newly deployed Synapse workspace.
-- Click on link'Open' inside the box labelled as 'Open Synapse Studio'.
+- Click on link 'Open' inside the box labelled as 'Open Synapse Studio'.
 - Click on 'Log into Github' after workspace is opened. Provide your credentials for the github account holding the forked out repository.
 - After logging in into your github account, click on 'Integrate' icon in the left panel. A blade will appear from right side of the screen.
-- Make sure that 'main' branch is selected as 'collaboration branch' and click 'Save'.
+- Make sure that 'main' branch is selected as 'Working branch' and click 'Save'.
 
 ![PostDeployment-1](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/1.gif)
 

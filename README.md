@@ -70,8 +70,8 @@ On successfull validation, click 'Create'.
 - Click on the newly deployed Synapse workspace.
 - Click on link'Open' inside the box labelled as 'Open Synapse Studio'.
 - Click on 'Log into Github' after workspace is opened. Provide your credentials for the github account holding the forked out repository.
-- After logging in into your github account, click on 'Integrate' icon in the left panel.
-- Make sure that 'main' branch is selected as 'collaboration branch' in the right blade and click 'Save'.
+- After logging in into your github account, click on 'Integrate' icon in the left panel. A blade will appear from right side of the screen.
+- Make sure that 'main' branch is selected as 'collaboration branch' and click 'Save'.
 
 ![PostDeployment-1](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/1.gif)
 
@@ -81,4 +81,9 @@ On successfull validation, click 'Create'.
 - Make sure the SQL login username is correct and the workspace name is fully qualified domain name, i.e. workspaceName.database.windows.net
 
 ![PostDeployment-2](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/2.gif)
+
+- After the parameters are updated, click on 'Commit all'.
+- After successful commit, click 'Publish'. A blade will appear from right side of the window.
+- Click 'Ok'.
+
 ![PostDeployment-3](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/3.gif)

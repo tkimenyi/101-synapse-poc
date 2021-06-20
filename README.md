@@ -69,7 +69,16 @@ On successfull validation, click 'Create'.
 - You'll see all the resources deployed in the resource group.
 - Click on the newly deployed Synapse workspace.
 - Click on link'Open' inside the box labelled as 'Open Synapse Studio'.
+- Click on 'Log into Github' after workspace is opened. Provide your credentials for the github account holding the forked out repository.
+- After logging in into your github account, click on 'Integrate' icon in the left panel.
+- Make sure that 'main' branch is selected as 'collaboration branch' in the right blade and click 'Save'.
 
 ![PostDeployment-1](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/1.gif)
+
+- Now open the pipeline named 'TripFaresDataPipeline'.
+- Click on 'Parameters' tab at bottom of the window.
+- Update the parameters' values. You can copy the resources' names from the resource group recently deployed.
+- Make sure the SQL login username is correct and the workspace name is fully qualified domain name, i.e. workspaceName.database.windows.net
+
 ![PostDeployment-2](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/2.gif)
 ![PostDeployment-3](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/3.gif)

@@ -69,4 +69,7 @@ On successfull validation, click 'Create'.
 - You'll see all the resources deployed in the resource group.
 - Click on the newly deployed Synapse workspace.
 - Click on link'Open' inside the box labelled as 'Open Synapse Studio'.
-- Click 
+
+![PostDeployment-1](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/1.gif)
+![PostDeployment-2](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/2.gif)
+![PostDeployment-3](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/3.gif)

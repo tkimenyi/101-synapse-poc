@@ -61,7 +61,7 @@ Owner role (otherwise Contributor + User Access Administrator roles) for the Azu
    - Resume Time
    - Pause Time
    - Option (Enabled or Disabled) for Transparent Data Encryption
-   - Github Username (username for the account where [this github repository](https://github.com/Azure/azure-synapse-consumption-play) was forked out into)
+   - Github Username (username for the account where [this github repository](https://github.com/osamaemumba/101-synapse-poc) was forked out into)
 
 - Click 'Review + Create'.
 

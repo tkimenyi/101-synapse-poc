@@ -42,7 +42,7 @@ Owner role (otherwise Contributor + User Access Administrator roles) for the Azu
  
 - Click 'Deploy To Azure' button given below to deploy all the resources. 
 
-  [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-synapse-consumption-play%2Fmain%2Fazuredeploy.json)
+  [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fosamaemumba%2F101-synapse-poc%2Fmain%2Fazuredeploy.json)
 
 - Provide the values for:
 

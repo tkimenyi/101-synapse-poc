@@ -237,6 +237,13 @@
           "description": "Enable or Disable Transparent Data Encryption on SQL pool"
         }
     },
+    "managedVirtualNetwork": {
+        "type": "string",
+        "allowedValues": [
+            "default",
+            ""
+        ]
+    },
     "githubUsername": {
         "type": "string",
         "metadata": {
@@ -431,6 +438,7 @@
         },
         "sqlAdministratorLogin": "[parameters('sqlAdministratorLogin')]",
         "sqlAdministratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
+        "managedVirtualNetwork": "[parameters('managedVirtualNetwork')]",
         "workspaceRepositoryConfiguration": {
           "type": "WorkspaceGitHubConfiguration",
           "hostName": "https://github.com",

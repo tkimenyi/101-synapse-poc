@@ -237,16 +237,6 @@
           "description": "Enable or Disable Transparent Data Encryption on SQL pool"
         }
     },
-    "managedVirtualNetwork": {
-        "type": "string",
-        "allowedValues": [
-            "default",
-            ""
-        ],
-        "metadata": {
-          "description": "Select 'default' to enable managed vnet. Leave it blank if you dont want to enable mangaed vnet"
-        }
-    },
     "githubUsername": {
         "type": "string",
         "metadata": {
@@ -441,7 +431,7 @@
         },
         "sqlAdministratorLogin": "[parameters('sqlAdministratorLogin')]",
         "sqlAdministratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
-        "managedVirtualNetwork": "[parameters('managedVirtualNetwork')]",
+        "managedVirtualNetwork": "default",
         "workspaceRepositoryConfiguration": {
           "type": "WorkspaceGitHubConfiguration",
           "hostName": "https://github.com",

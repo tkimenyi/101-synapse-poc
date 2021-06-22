@@ -32,36 +32,38 @@ This template allows the Administrator to deploy a Proof-of-Concept environment 
 
 ## Prerequisites
 
-- Owner role (otherwise Contributor + User Access Administrator roles) for the Azure Subscription the template being deployed in. This is for creation of a separate Proof-of-Concept Resource Group and to delegate roles necessary for this proof of concept.
-- Fork out [this github repository](https://github.com/osamaemumba/101-synapse-poc) into your github account.
+Owner role (otherwise Contributor + User Access Administrator roles) for the Azure Subscription the template being deployed in. This is for creation of a separate Proof-of-Concept Resource Group and to delegate roles necessary for this proof of concept. Refer to this [official documentation](https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps) for RBAC role-assignments.
 
 ## Deployment
-Click 'Deploy To Azure' button given below to deploy all the resources. 
 
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fosamaemumba%2F101-synapse-poc%2Fmain%2Fazuredeploy.json)
+- Fork out [this github repository](https://github.com/Azure/azure-synapse-consumption-play) into your github account.
+ 
+- Click 'Deploy To Azure' button given below to deploy all the resources. 
 
-Provide the values for:
+  [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-synapse-consumption-play%2Fmain%2Fazuredeploy.json)
 
-- Resource group (create new)
-- Region
-- Company Tla
-- Option (true or false) for Allow All Connections
-- Option (true or false) for Spark Deployment
-- Spark Node Size (Small, Medium, large) if Spark Deployment is set to true
-- Sql Administrator Login
-- Sql Administrator Login Password
-- Sku
-- Option (true or false) for Metadata Sync
-- Frequency
-- Time Zone
-- Resume Time
-- Pause Time
-- Option (Enabled or Disabled) for Transparent Data Encryption
-- Github Username (username for the account where [this github repository](https://github.com/osamaemumba/101-synapse-poc) was forked out into)
+- Provide the values for:
 
-Click 'Review + Create'.
+   - Resource group (create new)
+   - Region
+   - Company Tla
+   - Option (true or false) for Allow All Connections
+   - Option (true or false) for Spark Deployment
+   - Spark Node Size (Small, Medium, large) if Spark Deployment is set to true
+   - Sql Administrator Login
+   - Sql Administrator Login Password
+   - Sku
+   - Option (true or false) for Metadata Sync
+   - Frequency
+   - Time Zone
+   - Resume Time
+   - Pause Time
+   - Option (Enabled or Disabled) for Transparent Data Encryption
+   - Github Username (username for the account where [this github repository](https://github.com/Azure/azure-synapse-consumption-play) was forked out into)
 
-On successfull validation, click 'Create'.
+- Click 'Review + Create'.
+
+- On successfull validation, click 'Create'.
 
 ## Post Deployment
 

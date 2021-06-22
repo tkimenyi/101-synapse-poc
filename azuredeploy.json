@@ -242,7 +242,10 @@
         "allowedValues": [
             "default",
             ""
-        ]
+        ],
+        "metadata": {
+          "description": "Select 'default' to enable managed vnet. Leave it blank if you dont want to enable mangaed vnet"
+        }
     },
     "githubUsername": {
         "type": "string",

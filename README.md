@@ -94,6 +94,6 @@ Owner role (otherwise Contributor + User Access Administrator roles) for the Azu
 
 - Now to trigger the pipeline, click 'Add trigger' at the top panel and click 'Trigger now'.
 - Confirm the pipeline parameters' values and click 'Ok'.
-- You can check the pipeline status uner 'Pipeline runs' in the 'Monitor' tab on the left panel.
+- You can check the pipeline status under 'Pipeline runs' in the 'Monitor' tab on the left panel.
 
 ![PostDeployment-4](https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/images/5.gif)

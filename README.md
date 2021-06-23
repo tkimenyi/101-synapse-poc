@@ -69,6 +69,7 @@ Owner role (otherwise Contributor + User Access Administrator roles) for the Azu
 
 ## Post Deployment
 
+- Current Azure user needs to have "Storage Blob Data Contributor" role access to recently created Azure Data Lake Storage Gen2 account to avoid 403 type permission errors.
 - After the deployment is complete, click 'Go to resource group'.
 - You'll see all the resources deployed in the resource group.
 - Click on the newly deployed Synapse workspace.

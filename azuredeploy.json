@@ -249,7 +249,7 @@
     "location": "[resourceGroup().location]",
     "deploymentType": "poc",
     "synapseName": "[toLower(concat(parameters('companyTla'),uniquestring(resourceGroup().id),variables('deploymentType')))]",
-    "dlsName": "[toLower(concat('dls',parameters('companyTla'),uniquestring(resourceGroup().id),variables('deploymentType')))]",
+    "dlsName": "[toLower(concat(parameters('companyTla'),uniquestring(resourceGroup().id),variables('deploymentType')))]",
     "dlsFsName": "[toLower(concat('dls',parameters('companyTla'),variables('deploymentType'),'fs1'))]",
     "sqlPoolName": "[toLower(concat(variables('workspaceName'),'p1'))]",
     "workspaceName": "[toLower(concat(variables('synapseName'),'ws1'))]",

@@ -1,0 +1,7 @@
+{
+	"name": "AzureDataLakeStorage814",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/863e0f98-96f2-4850-b49c-3ad79f4d6c69/resourceGroups/synapse-dev/providers/Microsoft.Storage/storageAccounts/eduyttcwzuquid6cpoc",
+		"groupId": "dfs"
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "conw243s3e75d5nypocws1"
+		},
+		"TripFaresSynapseAnalyticsLinkedService_connectionString": {
+			"value": ""
+		},
+		"HttpServerTripDataLinkedService_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/tripDataAndFaresCSV/trip-data.csv"
+		},
+		"HttpServerTripFareDataLinkedService_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/osamaemumba/101-synapse-poc/main/tripDataAndFaresCSV/fares-data.csv"
+		},
+		"TripFaresDataLakeStorageLinkedService_properties_typeProperties_url": {
+			"value": "@{concat('https://',linkedService().datalakeAccountName,'.dfs.core.windows.net')}"
+		},
+		"keyVaultLinkedservice_properties_typeProperties_baseUrl": {
+			"value": "@{concat('https://',linkedService().keyVaultName,'.vault.azure.net/')}"
+		}
+	}
+}

@@ -331,7 +331,7 @@
 					},
 					"SQLDedicatedPoolName": {
 						"type": "string",
-						"defaultValue": "eduyttcwzuquid6cpocws1p1"
+						"defaultValue": "conw243s3e75d5nypocws1p1"
 					},
 					"SQLLoginUsername": {
 						"type": "string",
@@ -339,11 +339,11 @@
 					},
 					"KeyVaultName": {
 						"type": "string",
-						"defaultValue": "kveduyttcwzuquid6cpoc"
+						"defaultValue": "kvconw243s3e75d5nypoc"
 					},
 					"datalakeAccountName": {
 						"type": "string",
-						"defaultValue": "eduyttcwzuquid6cpoc"
+						"defaultValue": "conw243s3e75d5nypoc"
 					}
 				},
 				"folder": {
